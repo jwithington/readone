@@ -33,12 +33,12 @@ Rails.application.configure do
     domain: Rails.application.secrets.domain_name,
     authentication: "plain",
     enable_starttls_auto: true,
-    user_name: Rails.application.secrets.email_provider_username,
-    password: Rails.application.secrets.email_provider_apikey
+    :user_name => ENV["MANDRILL_USERNAME"],
+    :password  => ENV["MANDRILL_API_KEY"]
   }
   # ActionMailer Config
   config.action_mailer.default_url_options = { :host => 'localhost:3000' }
-  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.delivery_method = :test
   config.action_mailer.raise_delivery_errors = true
   # Send email in development mode?
   config.action_mailer.perform_deliveries = true

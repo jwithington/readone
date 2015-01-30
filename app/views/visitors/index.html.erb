@@ -1,2 +1,21 @@
-<h3>Welcome</h3>
-<p><%= link_to 'Users:', users_path %> <%= User.count %> registered</p>
+<% provide(:title, "Home") %>
+<h3>Home: ReadOne</h3>
+	<p>
+		You've found the ReadOne Home page!
+	</p>
+<% if user_signed_in? %>
+	<p>
+		Sometime soon, this page will show you an article.
+	</p>
+	<p>
+		
+	</p>
+	<% else %>
+		<p>
+			<h3>
+		    <ul><%= link_to 'Sign in here', new_user_session_path %></ul>
+		    <ul><p> or </p></ul>
+		  	<ul><%= link_to 'Sign up here', new_user_registration_path %></ul>
+		  </h3>
+  	</p>
+  <% end %>

@@ -1,4 +1,4 @@
 class FeedsController < ApplicationController
-	def update
+	def index
 	end
 end

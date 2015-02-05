@@ -1,0 +1,17 @@
+<h3>Feeds: ReadOne</h3>
+<% if user_signed_in? %>
+  <p>
+    Eventually this will display your feeds.
+  </p>
+  <p>
+    
+  </p>
+  <% else %>
+    <p>
+      <h3>
+        <ul><%= link_to 'Sign in here', new_user_session_path %></ul>
+        <ul><p> or </p></ul>
+        <ul><%= link_to 'Sign up here', new_user_registration_path %></ul>
+      </h3>
+    </p>
+  <% end %>

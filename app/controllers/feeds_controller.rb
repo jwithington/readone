@@ -7,7 +7,8 @@ class FeedsController < ApplicationController
   end
  
 	def new
-		@feed = Feed.new
+    # This will assign the user id of the currently logged-in user to the feed
+		@feed = current_user.feeds.new
   end
 
   def edit
@@ -18,14 +19,13 @@ class FeedsController < ApplicationController
     redirect_to feeds_path
   end
   
-  def feed_params
-    params.require(:feed).permit(:url)
-  end
-
   def create
-    @feed = Feed.new(params[:feedurl])
-    @feed.save
-    redirect_to @feed
+    # Same as #new, assigns the user id of the currently logged-in user to the feed
+    # The feed_params go here as arguments for the newly created feed
+    @feed = current_user.feeds.new(feed_params)
+    if @feed.save
+      redirect_to @feed
+    end
 
     # respond_to do |format|
     #   if @feed.save
@@ -37,4 +37,10 @@ class FeedsController < ApplicationController
     # #   end
     # end
   end
+
+  private
+
+  def feed_params
+    params.require(:feed).permit(:feedurl)
+  end 
 end

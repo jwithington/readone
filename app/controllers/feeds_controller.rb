@@ -14,22 +14,27 @@ class FeedsController < ApplicationController
   end
 
   def destroy
+    Feed.find(params[:id]).destroy
+    redirect_to feeds_path
   end
   
   def feed_params
     params.require(:feed).permit(:url)
   end
-  def create
-    @feed = current_user.feeds.new(feed_params)
 
-    respond_to do |format|
-      if @feed.save
-        format.html { redirect_to @feed, notice: 'Feed was successfully added.' }
-        format.json { render action: 'show', status: :created, location: @feed }
-      else
-        format.html { render action: 'new' }
-        format.json { render json: @feed.errors, status: :unprocessable_entity }
-      end
-    end
+  def create
+    @feed = Feed.new(params[:feedurl])
+    @feed.save
+    redirect_to @feed
+
+    # respond_to do |format|
+    #   if @feed.save
+    #     format.html { redirect_to @feed, notice: 'Feed was successfully added.' }
+    #     format.json { render action: 'show', status: :created, location: @feed }
+    #   else
+    #     format.html { render action: 'new' }
+    #     format.json { render json: @feed.errors, status: :unprocessable_entity }
+    # #   end
+    # end
   end
 end

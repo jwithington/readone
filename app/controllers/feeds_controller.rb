@@ -1,6 +1,7 @@
 class FeedsController < ApplicationController
+
 	def index
-    @feeds = Feed.all
+    @feeds = current_user.feeds
   end
  	
  	def show
@@ -23,8 +24,9 @@ class FeedsController < ApplicationController
     # Same as #new, assigns the user id of the currently logged-in user to the feed
     # The feed_params go here as arguments for the newly created feed
     @feed = current_user.feeds.new(feed_params)
+    # render plain: params[:feedurl].inspect
     if @feed.save
-      redirect_to @feed
+      redirect_to feeds_path
     end
 
     # respond_to do |format|
